@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
 @{
-    ViewBag.Title = "Driftservice-Notification";
+    ViewBag.Title = "Driftinformation";
 }
 
 <div class="jumbotron jumbotron-fluid jumbotronFirstpage">
@@ -12,35 +12,45 @@
     </div>
 </div>
 
+<div>
+    <h4><b>DRIFTINFORMATION</b></h4>
+    <p>
+        Nedan hittar du all information om eventuella störningar.
+        Vill du prenumerera på driftinformation och få dem via e-post och/eller sms klicka <a href= "@System.Web.Configuration.WebConfigurationManager.AppSettings["RegistrationHttpAdress"]">här</a> för att prenumerera.
+        Du kan när du vill välja att avsluta din prenumeration.
+        Planerade arbeten under s.k. servicefönster hittar du här <a href="https://www.coreit.se/servicefonster">www.coreit.se/servicefonster.</a>
+    </p>
+</div>
+<form class="form-horizontal">
+   
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+    {
+        <div class="form-group col-sm-9 col-lg-9">
+            @Html.TextBox("SearchString", null, new { placeholder = " Sök på ord...", id = "searchString" })
+            @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
+            <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
+            <span>Sök på ord och/eller datum. Datum visar 2 veckor bakåt.</span>
+        </div>
+    }
+</form>
 
- <form class="form-horizontal">
-          @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
-          {
-            <div class="form-group col-sm-6">
-                @Html.TextBox("SearchString", null, new { placeholder = " Enter name...", id = "searchString" })
-                @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
-                <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
-            </div>
-          }
- </form>
 
 
-       
-         <div>
+<div>
     <table class="table Table-border-spacing">
         <thead>
             <tr>
                 <th class="th-td-padding th-first">
-                    @Html.DisplayNameFor(model => model.HeadLine)
+                   Rubrik
                 </th>
                 <th class="th-td-padding th-second">
-                    @Html.DisplayNameFor(model => model.Text)
+                   Innehåll
                 </th>
                 <th class="th-td-padding th-third">
-                    @Html.DisplayNameFor(model => model.Date)
+                   Datum
                 </th>
                 <th class="th-td-padding th-fourth">
-                    <b>Service type</b>
+                    <b>Tjänster</b>
                 </th>
             </tr>
         </thead>
@@ -49,16 +59,16 @@
         {
             <tr class="searchRow" onclick="document.location='@(Url.Action("Details", new { id = item.LogID }))'">
                 <td class="th-td-padding td-first">
-                    @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 15) + "..." : item.HeadLine)
+                    @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 25) + "..." : item.HeadLine)
                 </td>
                 <td class="th-td-padding td-second">
-                    @(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)
+                    @(item.Text.Length > 15 ? item.Text.Substring(0, 40) + "..." : item.Text)
                 </td>
                 <td class="th-td-padding td-third">
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td class="th-td-padding td-fourth">
-                    @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
+                    @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 40) + "..." : item.SelectedServiceType)
                 </td>
 
             </tr>
@@ -69,5 +79,5 @@
 
 
 
-   
+
 

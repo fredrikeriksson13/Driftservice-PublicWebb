@@ -46,7 +46,7 @@ namespace DriftService.Views.Contact
 
             else if(string.IsNullOrEmpty(searchDate))
             {
-                ViewBag.SelectedDate = " Enter date...";
+                ViewBag.SelectedDate = "Välj datum";
             }
 
             return View(ListOfLogs.OrderByDescending(o => o.Date).ToList().Take(50));
@@ -58,11 +58,6 @@ namespace DriftService.Views.Contact
             var l = ListOfLogs.Find(x => x.LogID == id);
             ViewBag.SelectedServiceType = l.SelectedServiceType;
             return View(l);
-        }
-
-        public ActionResult About()//Ta bort
-        {
-            return View();
         }
 
         public void FindAndParserSelectedServiceType()
