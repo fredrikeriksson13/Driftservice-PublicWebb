@@ -62,13 +62,13 @@
                     @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 25) + "..." : item.HeadLine)
                 </td>
                 <td class="th-td-padding td-second">
-                    @(item.Text.Length > 15 ? item.Text.Substring(0, 40) + "..." : item.Text)
+                    @(item.Text.Length > 40 ? item.Text.Substring(0, 40) + "..." : item.Text)
                 </td>
                 <td class="th-td-padding td-third">
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td class="th-td-padding td-fourth">
-                    @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 40) + "..." : item.SelectedServiceType)
+                    @(item.SelectedServiceType.Length > 40 ? item.SelectedServiceType.Substring(0, 40) + "..." : item.SelectedServiceType)
                 </td>
 
             </tr>
